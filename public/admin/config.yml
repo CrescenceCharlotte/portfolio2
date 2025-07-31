@@ -1,12 +1,12 @@
 backend:
-  name: CorentinBasson
-  repo: CorentinBasson/foliobase  # Remplacez par votre repository GitHub réel
-  branch: dev
-  base_url: https://foliobase.netlify.app  # URL de votre site
+  name: git-gateway
+  repo: CorentinBasson/portfolio  # ou ton vrai repo
+  branch: main
+  base_url: https://cbsn.netlify.app # URL de votre site
   auth_endpoint: /.netlify/functions/auth  # Notre fonction d'authentification
 
 # URL du site pour afficher un lien dans la navbar du CMS
-site_url: https://foliobase.netlify.app
+site_url: https://cbsn.netlify.app
 
 # Configuration du stockage des médias avec Cloudinary
 media_library:
