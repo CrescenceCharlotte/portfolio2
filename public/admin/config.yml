@@ -12,8 +12,8 @@ site_url: https://cbsn.netlify.app
 media_library:
   name: cloudinary
   config:
-    cloud_name: dtnbb9ykw  # À remplacer par le nom de votre compte Cloudinary
-    api_key: 116398255276922        # À remplacer par votre clé API Cloudinary
+    cloud_name: dcrgwzlnc  # À remplacer par le nom de votre compte Cloudinary
+    api_key: 772966115598952        # À remplacer par votre clé API Cloudinary
     multiple: true
 
 # Dossier de stockage des médias dans le repository (fallback pour PDF > 20MB)
