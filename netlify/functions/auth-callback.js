@@ -54,10 +54,10 @@ exports.handler = async (event, context) => {
             }
             // Envoyer le token au CMS
             e.source.postMessage(
-              'authorization:github:success:${JSON.stringify({
+              'authorization:github:success:' + JSON.stringify({
                 token: tokenData.access_token,
                 provider: 'github'
-              })}',
+              }),
               e.origin
             );
           }
