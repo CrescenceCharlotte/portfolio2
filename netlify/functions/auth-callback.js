@@ -42,29 +42,25 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Script pour envoyer le token au CMS
+    // Script pour envoyer le token au CMS - Format Decap CMS 2024
     const script = `
       <script>
         (function() {
-          function receiveMessage(e) {
-            console.log("receiveMessage %o", e);
-            if (e.origin !== "${process.env.URL}") {
-              console.log("Invalid origin: %o", e.origin);
-              return;
-            }
-            // Envoyer le token au CMS
-            e.source.postMessage(
-              'authorization:github:success:' + JSON.stringify({
-                token: tokenData.access_token,
+          if (window.opener) {
+            // Message avec le format attendu par Decap CMS
+            window.opener.postMessage({
+              type: 'authorization:github:success',
+              payload: {
+                token: '${tokenData.access_token}',
                 provider: 'github'
-              }),
-              e.origin
-            );
+              }
+            }, '${process.env.URL}');
+            
+            console.log('Token sent to Decap CMS');
+            window.close();
+          } else {
+            console.error('No opener window found');
           }
-          window.addEventListener("message", receiveMessage, false);
-          // Informer que la fenêtre est prête
-          console.log("Posting message to %o", "${process.env.URL}");
-          window.opener && window.opener.postMessage("authorizing:github", "${process.env.URL}");
         })();
       </script>
     `;
