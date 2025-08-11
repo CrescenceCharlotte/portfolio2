@@ -5,9 +5,9 @@
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
 
-# Configuration pour les redirects
+# Configuration pour les redirects - permettre l'accès direct au répertoire admin statique
 [[redirects]]
-  from = "/admin/*"
+  from = "/admin"
   to = "/admin/index.html"
   status = 200
 
