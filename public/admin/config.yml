@@ -1,19 +1,19 @@
 backend:
   name: github
-  repo: CorentinBasson/portfolio
+  repo: CrescenceCharlotte/portfolio2
   branch: main
-  base_url: https://cbsn.netlify.app
+  base_url: https://crescencecharlotte.netlify.app/
   auth_endpoint: /.netlify/functions/auth
 
 # URL du site pour afficher un lien dans la navbar du CMS
-site_url: https://cbsn.netlify.app
+site_url: https://crescencecharlotte.netlify.app/
 
 # Configuration du stockage des médias avec Cloudinary
 media_library:
   name: cloudinary
   config:
-    cloud_name: dcrgwzlnc  # À remplacer par le nom de votre compte Cloudinary
-    api_key: 772966115598952        # À remplacer par votre clé API Cloudinary
+    cloud_name: dyydosgxb  # À remplacer par le nom de votre compte Cloudinary
+    api_key: 395929777394519        # À remplacer par votre clé API Cloudinary
     multiple: true
 
 # Dossier de stockage des médias dans le repository (fallback pour PDF > 20MB)
