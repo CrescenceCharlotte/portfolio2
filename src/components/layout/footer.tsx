@@ -1,89 +1,142 @@
 import Link from "next/link"
-import { Separator } from "@/components/ui/separator"
+
+const links = [
+  { name: "Accueil",      href: "/" },
+  { name: "Réalisations", href: "/realisations" },
+  { name: "À propos",     href: "/a-propos" },
+  { name: "Contact",      href: "/contact" },
+]
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
+  const year = new Date().getFullYear()
 
   return (
-    <footer className="w-full border-t bg-background">
-      <div className="max-w-7xl mx-auto w-full px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Logo et description */}
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">P</span>
-              </div>
-              <span className="font-bold text-xl">Portfolio</span>
+    <footer
+      style={{
+        position:     "relative",
+        borderTop:    "1px solid rgba(200, 220, 255, 0.06)",
+        background:   "rgba(2, 6, 16, 0.6)",
+        paddingTop:   "3.5rem",
+        paddingBottom: "2rem",
+        overflow:     "hidden",
+      }}
+    >
+      {/* Lueur dorée subtile en haut à gauche */}
+      <div
+        aria-hidden="true"
+        style={{
+          position:   "absolute",
+          top:        "-60px",
+          left:       "10%",
+          width:      "300px",
+          height:     "300px",
+          background: "radial-gradient(circle, rgba(197,160,89,0.04) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto w-full px-6 md:px-8">
+
+        {/* ── Ligne centrale : Brand ── */}
+        <div className="flex flex-col items-center text-center mb-10">
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <span
+              style={{
+                fontFamily:    "var(--font-serif, 'Playfair Display', serif)",
+                fontStyle:     "italic",
+                fontWeight:    700,
+                fontSize:      "clamp(1.4rem, 4vw, 2rem)",
+                letterSpacing: "0.04em",
+                color:         "rgba(220, 235, 255, 0.85)",
+                display:       "block",
+                marginBottom:  "0.35rem",
+              }}
+            >
+              Charlotte Crescence
+            </span>
+          </Link>
+          <span
+            style={{
+              fontFamily:    "var(--font-sans, Inter, sans-serif)",
+              fontWeight:    400,
+              fontSize:      "0.6rem",
+              letterSpacing: "0.28em",
+              textTransform: "uppercase",
+              color:         "rgba(140, 170, 210, 0.4)",
+            }}
+          >
+            Art Direction · Digital · Portfolio
+          </span>
+        </div>
+
+        {/* ── Séparateur or ── */}
+        <div
+          style={{
+            width:      "60px",
+            height:     "1px",
+            background: "rgba(197, 160, 89, 0.35)",
+            margin:     "0 auto 2.5rem",
+          }}
+        />
+
+        {/* ── Navigation ── */}
+        <nav className="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-10">
+          {links.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              style={{
+                fontFamily:    "var(--font-sans, Inter, sans-serif)",
+                fontWeight:    400,
+                fontSize:      "0.65rem",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color:         "rgba(150, 180, 220, 0.45)",
+                textDecoration: "none",
+                transition:    "color 0.25s",
+              }}
+              className="hover:!text-[rgba(197,160,89,0.8)]"
+            >
+              {item.name}
             </Link>
-            <p className="text-sm text-muted-foreground max-w-xs">
-              Portfolio de graphiste freelance. Découvrez mes créations et réalisations.
-            </p>
-          </div>
+          ))}
+        </nav>
 
-          {/* Navigation */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Navigation</h3>
-            <nav className="flex flex-col space-y-2">
-              <Link 
-                href="/" 
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Accueil
-              </Link>
-              <Link 
-                href="/about" 
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                À propos
-              </Link>
-              <Link 
-                href="/projects" 
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Réalisations
-              </Link>
-            </nav>
-          </div>
-
-          {/* Contact */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Contact</h3>
-            <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">
-                Prêt(e) à collaborer ?
-              </p>
-              <Link 
-                href="mailto:contact@portfolio.com" 
-                className="text-sm text-primary hover:underline"
-              >
-                contact@portfolio.com
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <Separator className="my-8" />
-        
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-xs text-muted-foreground">
-            © {currentYear} Portfolio. Tous droits réservés.
+        {/* ── Bas de page ── */}
+        <div
+          style={{
+            borderTop:  "1px solid rgba(200, 220, 255, 0.05)",
+            paddingTop: "1.5rem",
+            display:    "flex",
+            flexWrap:   "wrap",
+            justifyContent: "center",
+            gap:        "1rem",
+          }}
+        >
+          <p
+            style={{
+              fontFamily:    "var(--font-sans, Inter, sans-serif)",
+              fontSize:      "0.6rem",
+              letterSpacing: "0.14em",
+              color:         "rgba(130, 160, 200, 0.3)",
+            }}
+          >
+            © {year} Charlotte Crescence — Tous droits réservés
           </p>
-          <div className="flex items-center gap-4">
-            {process.env.NODE_ENV === 'development' && (
-              <Link 
-                href="/test" 
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                [Dev] Test Galeries
-              </Link>
-            )}
-            <p className="text-xs text-muted-foreground">
-              Créé avec Next.js & Decap CMS
-            </p>
-          </div>
+          <span style={{ color: "rgba(130, 160, 200, 0.15)", fontSize: "0.6rem" }}>·</span>
+          <p
+            style={{
+              fontFamily:    "var(--font-sans, Inter, sans-serif)",
+              fontSize:      "0.6rem",
+              letterSpacing: "0.14em",
+              color:         "rgba(130, 160, 200, 0.3)",
+            }}
+          >
+            Réalisé avec Next.js
+          </p>
         </div>
+
       </div>
     </footer>
   )
-} 
+}

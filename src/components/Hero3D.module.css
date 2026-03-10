@@ -1,0 +1,286 @@
+/* ============================================================
+   Hero3D — Ultra-Luxury · Bleu Nuit
+   Palette : Midnight #030818 · Blanc lunaire · Or #C5A059
+   ============================================================ */
+
+/* --- Conteneur principal (sticky scroll) --- */
+.section {
+  position: relative;
+  height: 200vh; /* court et percutant */
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  /* Fond bleu nuit profond avec légère variation de profondeur */
+  background: linear-gradient(
+    168deg,
+    #030c1f 0%,
+    #020818 35%,
+    #020610 65%,
+    #030a1c 100%
+  );
+  z-index: 0;
+}
+
+/* --- Nébuleuse de fond (couche 0) --- */
+.nebula {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 35% at 25% 65%, rgba(30, 0, 80, 0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 30% at 75% 25%, rgba(0, 20, 100, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 20% at 50% 80%, rgba(5, 10, 50, 0.08) 0%, transparent 70%);
+}
+
+/* --- Étoiles de fond scintillantes (couche 1) --- */
+.bgStars {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.twinkleStar {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(210, 228, 255, 0.9);
+  animation: twinkle linear infinite;
+  animation-fill-mode: backwards;
+  /* box-shadow pour le halo de chaque étoile */
+  box-shadow: 0 0 2px 0.5px rgba(150, 190, 255, 0.5);
+}
+
+/* 3 variantes de scintillement pour plus de naturel */
+.twinkleStar:nth-child(3n) {
+  animation-name: twinkleB;
+  background: rgba(255, 248, 220, 0.85); /* légèrement chaude */
+}
+
+.twinkleStar:nth-child(5n) {
+  animation-name: twinkleC;
+  background: rgba(180, 210, 255, 0.9); /* bleu-blanc pur */
+}
+
+/* --- Overlays post-processing --- */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(1, 4, 12, 0.7) 100%);
+  z-index: 11;
+  pointer-events: none;
+}
+
+.noise {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  opacity: 0.045;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* --- HUD — style index éditorial minimaliste --- */
+.hud {
+  position: absolute;
+  inset: 2rem;
+  z-index: 20;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 8px;
+  font-weight: 400;
+  color: rgba(140, 170, 210, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.hudTop,
+.hudBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hudLine {
+  flex: 1;
+  height: 1px;
+  background: rgba(100, 140, 200, 0.1);
+  margin: 0 1.5rem;
+}
+
+.hudGold {
+  color: rgba(197, 160, 89, 0.7);
+  font-weight: 500;
+}
+
+.centerNav {
+  align-self: flex-end;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 7.5px;
+  letter-spacing: 0.24em;
+  color: rgba(120, 160, 200, 0.25);
+}
+
+/* --- Scène 3D --- */
+.viewport {
+  position: absolute;
+  inset: 0;
+  perspective: 1000px;
+  overflow: hidden;
+  /* Au-dessus de la nébuleuse et des étoiles de fond */
+  z-index: 10;
+}
+
+.world {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Texte flottant (lettres pleines, effet nacre lunaire) --- */
+.bigText {
+  font-family: var(--font-serif, 'Playfair Display', serif);
+  font-weight: 700;
+  font-style: italic;
+  /* Lettres pleines visibles — blanc lunaire */
+  color: rgba(220, 235, 255, 0.72);
+  -webkit-text-stroke: 1px rgba(180, 210, 255, 0.45);
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  user-select: none;
+  filter: drop-shadow(0 0 24px rgba(80, 130, 255, 0.2));
+}
+
+/* Variante or — contraste chaud dans la nuit bleue */
+.bigTextGold {
+  color: rgba(197, 160, 89, 0.78);
+  -webkit-text-stroke: 1px rgba(197, 160, 89, 0.5);
+  filter: drop-shadow(0 0 22px rgba(197, 160, 89, 0.18));
+}
+
+/* --- Fondu de sortie (au-dessus du viewport 3D) --- */
+.exitFade {
+  position: absolute;
+  inset: 0;
+  z-index: 18;
+  pointer-events: none;
+  background: #030818;
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* Liseré permanent en bas — indique la continuité du scroll */
+.exitHint {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 25%;
+  z-index: 17;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(2, 6, 18, 0.75));
+}
+
+/* --- Particules 3D (étoiles du tunnel) --- */
+.star {
+  position: absolute;
+  width: 1.5px;
+  height: 1.5px;
+  background: rgba(200, 228, 255, 0.7);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  box-shadow: 0 0 3px 1px rgba(150, 200, 255, 0.3);
+}
+
+/* --- Indicateur de défilement --- */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  pointer-events: none;
+  animation: fadeInUp 1.5s ease 1s both;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, transparent, rgba(197, 160, 89, 0.4));
+  animation: scrollPulse 2.2s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.scrollIndicator span {
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 7px;
+  letter-spacing: 0.35em;
+  color: rgba(140, 170, 210, 0.3);
+  text-transform: uppercase;
+}
+
+/* --- Keyframes --- */
+@keyframes twinkle {
+  0%   { opacity: 0.08; transform: scale(0.7);  }
+  35%  { opacity: 1;    transform: scale(1.25); }
+  65%  { opacity: 0.25; transform: scale(0.85); }
+  100% { opacity: 0.1;  transform: scale(0.75); }
+}
+
+@keyframes twinkleB {
+  0%   { opacity: 0.12; transform: scale(0.8);  }
+  50%  { opacity: 0.9;  transform: scale(1.3);  }
+  80%  { opacity: 0.2;  transform: scale(0.9);  }
+  100% { opacity: 0.15; transform: scale(0.8);  }
+}
+
+@keyframes twinkleC {
+  0%   { opacity: 0.05; transform: scale(0.6);  }
+  25%  { opacity: 0.7;  transform: scale(1.1);  }
+  55%  { opacity: 0.15; transform: scale(0.8);  }
+  75%  { opacity: 0.85; transform: scale(1.2);  }
+  100% { opacity: 0.08; transform: scale(0.65); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0);    }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.35; transform: scaleY(1);    }
+  50%       { opacity: 0.85; transform: scaleY(1.12); }
+}

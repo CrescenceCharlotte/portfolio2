@@ -2,81 +2,156 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
 
 const navigation = [
-  { name: "Accueil", href: "/" },
-  { name: "À propos", href: "/about" },
-  { name: "Réalisations", href: "/projects" },
+  { name: "Accueil",       href: "/" },
+  { name: "Réalisations",  href: "/realisations" },
+  { name: "À propos",      href: "/a-propos" },
 ]
 
 export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="max-w-7xl mx-auto w-full flex h-16 items-center justify-between px-4">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">P</span>
-          </div>
-          <span className="font-bold text-xl">Portfolio</span>
+    <header
+      className="sticky top-0 z-50 w-full"
+      style={{
+        background:    "rgba(2, 8, 18, 0.75)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        borderBottom:  "1px solid rgba(200, 220, 255, 0.06)",
+      }}
+    >
+      <div className="max-w-7xl mx-auto w-full flex h-16 items-center justify-between px-6 md:px-8">
+
+        {/* ── Logo / Brand ── */}
+        <Link
+          href="/"
+          style={{ textDecoration: "none" }}
+          className="flex flex-col leading-tight group"
+        >
+          <span
+            style={{
+              fontFamily:   "var(--font-serif, 'Playfair Display', serif)",
+              fontStyle:    "italic",
+              fontWeight:   700,
+              fontSize:     "1.1rem",
+              letterSpacing: "0.02em",
+              color:        "rgba(220, 235, 255, 0.92)",
+              transition:   "color 0.3s",
+            }}
+            className="group-hover:text-[#C5A059]"
+          >
+            Charlotte Crescence
+          </span>
+          <span
+            style={{
+              fontFamily:   "var(--font-sans, Inter, sans-serif)",
+              fontWeight:   400,
+              fontSize:     "0.58rem",
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color:        "rgba(140, 170, 210, 0.45)",
+              marginTop:    "1px",
+            }}
+          >
+            Art Direction · Digital
+          </span>
         </Link>
 
-        {/* Navigation Desktop */}
-        <nav className="hidden md:flex items-center space-x-6">
+        {/* ── Navigation Desktop ── */}
+        <nav className="hidden md:flex items-center gap-8">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-medium transition-colors hover:text-primary"
+              style={{
+                fontFamily:   "var(--font-sans, Inter, sans-serif)",
+                fontWeight:   400,
+                fontSize:     "0.72rem",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color:        "rgba(170, 200, 230, 0.55)",
+                textDecoration: "none",
+                transition:   "color 0.25s",
+              }}
+              className="hover:!text-[rgba(197,160,89,0.9)]"
             >
               {item.name}
             </Link>
           ))}
         </nav>
 
-        {/* CTA Desktop */}
-        <div className="hidden md:flex items-center space-x-4">
-          <Button asChild>
-            <Link href="/projects">Voir mes projets</Link>
-          </Button>
-        </div>
-
-        {/* Menu Mobile */}
-        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Ouvrir le menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-            <div className="flex flex-col space-y-4 mt-6">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-lg font-medium transition-colors hover:text-primary py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="pt-4">
-                <Button asChild className="w-full">
-                  <Link href="/projects" onClick={() => setMobileMenuOpen(false)}>
-                    Voir mes projets
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+        {/* ── Burger Mobile ── */}
+        <button
+          className="md:hidden flex flex-col gap-1.5 p-2"
+          onClick={() => setOpen(!open)}
+          aria-label="Menu"
+          style={{ background: "none", border: "none" }}
+        >
+          <span
+            style={{
+              display:    "block",
+              width:      "22px",
+              height:     "1px",
+              background: open ? "rgba(197,160,89,0.8)" : "rgba(200,220,255,0.6)",
+              transition: "all 0.3s",
+              transform:  open ? "translateY(5px) rotate(45deg)" : "none",
+            }}
+          />
+          <span
+            style={{
+              display:    "block",
+              width:      "22px",
+              height:     "1px",
+              background: open ? "transparent" : "rgba(200,220,255,0.6)",
+              transition: "opacity 0.3s",
+            }}
+          />
+          <span
+            style={{
+              display:    "block",
+              width:      "22px",
+              height:     "1px",
+              background: open ? "rgba(197,160,89,0.8)" : "rgba(200,220,255,0.6)",
+              transition: "all 0.3s",
+              transform:  open ? "translateY(-5px) rotate(-45deg)" : "none",
+            }}
+          />
+        </button>
       </div>
+
+      {/* ── Menu Mobile ── */}
+      {open && (
+        <div
+          style={{
+            background:    "rgba(2, 8, 20, 0.97)",
+            borderTop:     "1px solid rgba(200, 220, 255, 0.06)",
+            padding:       "1.5rem 1.5rem 2rem",
+          }}
+        >
+          <nav className="flex flex-col gap-5">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                style={{
+                  fontFamily:    "var(--font-sans, Inter, sans-serif)",
+                  fontWeight:    400,
+                  fontSize:      "0.8rem",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color:         "rgba(170, 200, 230, 0.65)",
+                  textDecoration: "none",
+                }}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   )
-} 
+}

@@ -4,58 +4,42 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
+    /* ── Palette Nuit Bleue — Charlotte Crescence ── */
+    --background:            222 84% 4%;    /* #020812 — bleu nuit profond    */
+    --foreground:            210 35% 88%;   /* #d4e2f0 — blanc lunaire doux    */
 
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --card:                  220 70% 7%;    /* #091423 — carte bleu sombre     */
+    --card-foreground:       210 35% 88%;
+
+    --popover:               220 70% 7%;
+    --popover-foreground:    210 35% 88%;
+
+    --primary:               39 52% 56%;    /* #C5A059 — or luxe               */
+    --primary-foreground:    222 84% 5%;    /* texte foncé sur fond or         */
+
+    --secondary:             220 50% 12%;   /* #0c1a30 — bleu secondaire       */
+    --secondary-foreground:  210 30% 78%;
+
+    --muted:                 220 45% 11%;   /* #0a1828 — zone atténuée         */
+    --muted-foreground:      210 22% 52%;   /* texte secondaire bleu-gris      */
+
+    --accent:                220 50% 14%;   /* #0f2038 — accent bleu           */
+    --accent-foreground:     210 35% 88%;
+
+    --destructive:           0 72% 51%;
+    --destructive-foreground:210 40% 98%;
+
+    --border:                220 35% 16%;   /* #111e30 — bordure subtile       */
+    --input:                 220 40% 13%;   /* #0d1b2e — fond input            */
+    --ring:                  39 52% 56%;    /* or pour focus ring              */
+
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
+    --chart-3: 39 52% 56%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    --radius: 0.5rem;
   }
 }
 
@@ -65,6 +49,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Fond nuit bleu profond, commun à toutes les pages */
+    background-color: #020812;
   }
 }
 
@@ -121,6 +107,53 @@
   .prose a {
     @apply text-primary hover:text-primary/80;
   }
+}
+
+/* ── Variables + utilitaires partagés ── */
+:root {
+  --ogaki-gutter: clamp(1.5rem, 5vw, 4rem);
+}
+
+/* Input style formulaire nuit bleue */
+.ogaki-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(200, 220, 255, 0.12);
+  color: rgba(220, 235, 255, 0.85);
+  font-family: var(--font-sans, Inter, sans-serif);
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  padding: 0.85rem 0;
+  outline: none;
+  transition: border-color 0.4s ease;
+  letter-spacing: 0.02em;
+}
+
+.ogaki-input::placeholder {
+  color: rgba(200, 220, 255, 0.22);
+  letter-spacing: 0.05em;
+}
+
+.ogaki-input:focus {
+  border-bottom-color: rgba(197, 160, 89, 0.55);
+}
+
+/* Prose harmonisée sur fond sombre */
+.prose {
+  --tw-prose-body: rgba(200, 220, 255, 0.65);
+  --tw-prose-headings: rgba(220, 235, 255, 0.92);
+  --tw-prose-links: #C5A059;
+  --tw-prose-bold: rgba(220, 235, 255, 0.9);
+  --tw-prose-counters: rgba(197, 160, 89, 0.6);
+  --tw-prose-bullets: rgba(197, 160, 89, 0.4);
+  --tw-prose-hr: rgba(200, 220, 255, 0.08);
+  --tw-prose-quotes: rgba(200, 220, 255, 0.55);
+  --tw-prose-quote-borders: rgba(197, 160, 89, 0.3);
+  --tw-prose-code: rgba(220, 235, 255, 0.8);
+  --tw-prose-pre-code: rgba(220, 235, 255, 0.8);
+  --tw-prose-pre-bg: rgba(10, 20, 45, 0.7);
+  --tw-prose-th-borders: rgba(200, 220, 255, 0.1);
+  --tw-prose-td-borders: rgba(200, 220, 255, 0.06);
 }
 
 /* Styles pour react-pdf */

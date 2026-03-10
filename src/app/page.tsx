@@ -1,164 +1,256 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Eye, ExternalLink } from "lucide-react"
+import { Hero3D } from "@/components/Hero3D"
+import { LiquidGlass } from "@/components/LiquidGlass"
+import { LiquidGlassButton } from "@/components/LiquidGlassButton"
+import { CardWork } from "@/components/CardWork"
 import { getFeaturedProjects } from "@/lib/content"
 
-// Les types sont importés depuis @/lib/content
+/* ── Données expertise (déduites des projets réels) ── */
+const EXPERTISE = [
+  {
+    num:   "01",
+    title: "Stratégie &\nCommunication",
+    desc:  "Conception de campagnes de communication globales, de la stratégie au déploiement. Sensibilisation, lancement événementiel, social media et print.",
+    tags:  ["Stratégie de com.", "Campagne print", "Social media", "Communication événementielle", "Gestion de projet"],
+  },
+  {
+    num:   "02",
+    title: "Design &\nIdentité Visuelle",
+    desc:  "Création d'identités visuelles cohérentes et de supports graphiques percutants. Direction artistique adaptée à chaque univers de marque.",
+    tags:  ["Adobe Illustrator", "Photoshop", "InDesign", "Figma", "Canva", "Direction artistique"],
+  },
+  {
+    num:   "03",
+    title: "Vidéo &\nContenu Digital",
+    desc:  "Production de contenus vidéo événementiels et digitaux. Du tournage au montage, pour des marques et institutions exigeantes.",
+    tags:  ["Production vidéo", "Montage", "Contenu digital", "CapCut", "Réseaux sociaux"],
+  },
+]
 
 export default function Home() {
-  // Données par défaut si le contenu n'existe pas encore
-  const defaultData = {
-    title: "Créatif Passionné",
-    subtitle: "Graphiste Freelance spécialisé en Design Visuel",
-    description: "Je transforme vos idées en créations visuelles percutantes. Découvrez un portfolio riche en projets d&apos;identité visuelle, web design et print.",
-    cta_text: "Découvrir mes projets",
-    body: ""
-  }
-
-  const pageData = defaultData
-  const featuredProjects = getFeaturedProjects(3) // Les 3 projets les plus récents
-
+  const featuredProjects = getFeaturedProjects(3)
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-        <div className="max-w-7xl mx-auto w-full px-4">
-          <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            {pageData.title}
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-            {pageData.subtitle}
-          </p>
-          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-            {pageData.description}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="text-lg px-8">
-              <Link href="/projects">
-                {pageData.cta_text}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8" asChild>
-              <Link href="/about">En savoir plus</Link>
-            </Button>
-          </div>
-          </div>
-        </div>
-      </section>
+    <div>
 
-      {/* Featured Projects Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Projets en vedette
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Découvrez quelques-unes de mes réalisations récentes qui illustrent ma passion pour le design et l&apos;innovation visuelle.
+      {/* ══════════════════════════════════════════
+          SECTION 1 — Hero 3D
+      ══════════════════════════════════════════ */}
+      <Hero3D />
+
+      {/* ══════════════════════════════════════════
+          SECTION 2 — Expertise en 3 colonnes
+      ══════════════════════════════════════════ */}
+      <section
+        style={{
+          position:  "relative",
+          padding:   "8rem 1.5rem",
+          zIndex:    1,
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+
+          {/* En-tête */}
+          <div style={{ textAlign: "center", marginBottom: "5rem" }}>
+            <p style={{
+              fontFamily:    "var(--font-sans, Inter, sans-serif)",
+              fontSize:      "0.6rem",
+              letterSpacing: "0.28em",
+              textTransform: "uppercase",
+              color:         "rgba(197, 160, 89, 0.7)",
+              marginBottom:  "1rem",
+            }}>
+              BTS Communication · La Réunion
             </p>
+            <h2 style={{
+              fontFamily:    "var(--font-serif, 'Playfair Display', serif)",
+              fontStyle:     "italic",
+              fontWeight:    700,
+              fontSize:      "clamp(2rem, 5vw, 3.2rem)",
+              color:         "rgba(220, 235, 255, 0.9)",
+              margin:        0,
+              lineHeight:    1.15,
+              letterSpacing: "0.01em",
+            }}>
+              Mon expertise
+            </h2>
+            {/* Séparateur or */}
+            <div style={{
+              width:      "48px",
+              height:     "1px",
+              background: "rgba(197, 160, 89, 0.4)",
+              margin:     "1.8rem auto 0",
+            }} />
           </div>
 
-          {featuredProjects.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {featuredProjects.map((project) => (
-                <Card key={project.slug} className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 relative overflow-hidden">
-                    {project.featured_image && (
-                      <img
-                        src={project.featured_image}
-                        alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                      <Button size="sm" asChild>
-                        <Link href={`/projects/${project.slug}`}>
-                          <Eye className="mr-2 h-4 w-4" />
-                          Voir le projet
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      <Badge variant="secondary">{project.project_type}</Badge>
-                      {project.annonceur && (
-                        <Badge variant="outline">{project.annonceur}</Badge>
-                      )}
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                      {project.excerpt}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-muted-foreground">
-                        {new Date(project.date).toLocaleDateString('fr-FR')}
-                      </span>
-                      {project.project_url && (
-                        <Button variant="ghost" size="sm" asChild>
-                          <Link href={project.project_url} target="_blank">
-                            <ExternalLink className="h-4 w-4" />
-                          </Link>
-                        </Button>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <p className="text-muted-foreground mb-8">
-                Aucun projet n&apos;est encore disponible. Les créations seront bientôt ajoutées !
+          {/* Grille 3 colonnes */}
+          <div style={{
+            display:             "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap:                 "1.5rem",
+          }}>
+            {EXPERTISE.map((col) => (
+              <LiquidGlass key={col.num} variant="panel" style={{ padding: "2.2rem 2rem", cursor: "default" }}>
+
+                {/* Numéro */}
+                <p style={{
+                  fontFamily:    "var(--font-sans, Inter, sans-serif)",
+                  fontSize:      "0.62rem",
+                  letterSpacing: "0.22em",
+                  color:         "rgba(197, 160, 89, 0.55)",
+                  marginBottom:  "1.2rem",
+                  marginTop:     0,
+                }}>
+                  {col.num}
+                </p>
+
+                {/* Titre */}
+                <h3 style={{
+                  fontFamily:    "var(--font-serif, 'Playfair Display', serif)",
+                  fontStyle:     "italic",
+                  fontWeight:    700,
+                  fontSize:      "1.45rem",
+                  color:         "rgba(220, 235, 255, 0.92)",
+                  whiteSpace:    "pre-line",
+                  lineHeight:    1.2,
+                  marginTop:     0,
+                  marginBottom:  "1.2rem",
+                  letterSpacing: "0.01em",
+                }}>
+                  {col.title}
+                </h3>
+
+                {/* Trait séparateur */}
+                <div style={{
+                  width:        "32px",
+                  height:       "1px",
+                  background:   "rgba(197, 160, 89, 0.3)",
+                  marginBottom: "1.2rem",
+                }} />
+
+                {/* Description */}
+                <p style={{
+                  fontFamily:  "var(--font-sans, Inter, sans-serif)",
+                  fontSize:    "0.82rem",
+                  lineHeight:  1.7,
+                  color:       "rgba(170, 200, 235, 0.65)",
+                  marginTop:   0,
+                  marginBottom: "1.8rem",
+                }}>
+                  {col.desc}
+                </p>
+
+                {/* Tags compétences */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                  {col.tags.map((tag) => (
+                    <span key={tag} style={{
+                      fontFamily:    "var(--font-sans, Inter, sans-serif)",
+                      fontSize:      "0.58rem",
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color:         "rgba(150, 185, 225, 0.5)",
+                      border:        "1px solid rgba(180, 210, 255, 0.1)",
+                      borderRadius:  "999px",
+                      padding:       "0.2rem 0.65rem",
+                    }}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+              </LiquidGlass>
+            ))}
+          </div>
+
+          {/* CTA vers à propos */}
+          <div style={{ textAlign: "center", marginTop: "3.5rem" }}>
+            <LiquidGlassButton href="/a-propos">
+              En savoir plus sur moi
+            </LiquidGlassButton>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          SECTION 3 — Réalisations sélectionnées
+      ══════════════════════════════════════════ */}
+      <section
+        style={{
+          position: "relative",
+          padding:  "6rem 1.5rem 8rem",
+          zIndex:   1,
+          borderTop: "1px solid rgba(200, 220, 255, 0.05)",
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+
+          {/* En-tête */}
+          <div style={{
+            display:        "flex",
+            alignItems:     "flex-end",
+            justifyContent: "space-between",
+            flexWrap:       "wrap",
+            gap:            "1.5rem",
+            marginBottom:   "4rem",
+          }}>
+            <div>
+              <p style={{
+                fontFamily:    "var(--font-sans, Inter, sans-serif)",
+                fontSize:      "0.6rem",
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                color:         "rgba(197, 160, 89, 0.7)",
+                marginBottom:  "0.8rem",
+                marginTop:     0,
+              }}>
+                Sélection
               </p>
-              <Button asChild variant="outline">
-                <Link href="/admin">Ajouter des projets</Link>
-              </Button>
+              <h2 style={{
+                fontFamily:    "var(--font-serif, 'Playfair Display', serif)",
+                fontStyle:     "italic",
+                fontWeight:    700,
+                fontSize:      "clamp(2rem, 5vw, 3.2rem)",
+                color:         "rgba(220, 235, 255, 0.9)",
+                margin:        0,
+                lineHeight:    1.15,
+              }}>
+                Réalisations
+              </h2>
             </div>
-          )}
-
-          <div className="text-center">
-            <Button asChild variant="outline" size="lg">
-              <Link href="/projects">
-                Voir tous les projets
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
+            <LiquidGlassButton href="/realisations" gold>
+              Voir tout le portfolio
+            </LiquidGlassButton>
           </div>
+
+          {/* Grille 3 projets */}
+          <div style={{
+            display:             "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap:                 "1.5rem",
+          }}>
+            {featuredProjects.map((p) => {
+              const image = Array.isArray(p.featured_image)
+                ? (p.featured_image as string[])[0]
+                : p.featured_image
+              const subtitle = Array.isArray(p.project_type)
+                ? (p.project_type as string[])[0]
+                : p.project_type
+              return (
+                <CardWork
+                  key={p.slug}
+                  slug={p.slug}
+                  title={p.title}
+                  image={image}
+                  subtitle={subtitle}
+                  hrefBase="/realisations"
+                />
+              )
+            })}
+          </div>
+
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-muted/50">
-        <div className="max-w-7xl mx-auto w-full px-4">
-          <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Prêt(e) à donner vie à votre projet ?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Collaborons ensemble pour créer quelque chose d&apos;exceptionnel qui marquera les esprits et atteindra vos objectifs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="text-lg px-8">
-              <Link href="mailto:contact@portfolio.com">
-                Démarrer un projet
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8" asChild>
-                            <Link href="/about">
-                En savoir plus sur moi
-              </Link>
-            </Button>
-          </div>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

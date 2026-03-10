@@ -76,6 +76,12 @@ module.exports = {
   				'var(--font-sans)',
   				'system-ui',
   				'sans-serif'
+  			],
+  			display: [
+  				'var(--font-serif)',
+  				'Playfair Display',
+  				'Georgia',
+  				'serif'
   			]
   		},
   		borderRadius: {

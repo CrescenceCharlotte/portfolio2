@@ -1,0 +1,108 @@
+/* ============================================================
+   StarCursor — Curseur étoile filante
+   ============================================================ */
+
+/* ── Étoile principale (suit le curseur exactement) ── */
+.star {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Centre l'étoile sur le point du curseur */
+  margin: -6px 0 0 -6px;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  z-index: 99999;
+  will-change: transform;
+}
+
+/* Forme en croix/étoile à 4 branches via clip-path */
+.starShape {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  clip-path: polygon(
+    50%  0%,   /* haut */
+    57% 43%,   /* coin haut-droit intérieur */
+    100% 50%,  /* droite */
+    57% 57%,   /* coin bas-droit intérieur */
+    50% 100%,  /* bas */
+    43% 57%,   /* coin bas-gauche intérieur */
+    0%  50%,   /* gauche */
+    43% 43%    /* coin haut-gauche intérieur */
+  );
+  filter:
+    drop-shadow(0 0 4px rgba(220, 235, 255, 1))
+    drop-shadow(0 0 10px rgba(150, 195, 255, 0.85))
+    drop-shadow(0 0 22px rgba(100, 160, 255, 0.5));
+  animation: starPulse 2s ease-in-out infinite;
+}
+
+/* ── Queue de la comète ── */
+.trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  margin-top: -1px;
+  /* L'origine est à gauche : la queue part du curseur et s'étend derrière */
+  transform-origin: 0% 50%;
+  background: linear-gradient(
+    to right,
+    rgba(220, 238, 255, 0.95) 0%,
+    rgba(140, 185, 255, 0.55) 40%,
+    rgba(80,  130, 255, 0.15) 75%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 99998;
+  will-change: transform, width, opacity;
+  filter: blur(0.4px);
+}
+
+/* ── Halo diffus autour de l'étoile (2e élément glow) ── */
+.glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  pointer-events: none;
+  z-index: 99997;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(130, 180, 255, 0.18) 0%,
+    transparent 70%
+  );
+  will-change: transform;
+  /* Suit avec un léger lag via CSS transition */
+  transition: width 0.1s, height 0.1s;
+}
+
+/* ── Keyframes ── */
+@keyframes starPulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter:
+      drop-shadow(0 0 4px rgba(220, 235, 255, 1))
+      drop-shadow(0 0 10px rgba(150, 195, 255, 0.85))
+      drop-shadow(0 0 22px rgba(100, 160, 255, 0.5));
+  }
+  50% {
+    transform: scale(1.45) rotate(45deg);
+    filter:
+      drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+      drop-shadow(0 0 14px rgba(200, 225, 255, 0.95))
+      drop-shadow(0 0 30px rgba(120, 170, 255, 0.65));
+  }
+}
+
+/* ── Desktop uniquement ── */
+@media (pointer: coarse) {
+  .star,
+  .trail,
+  .glow { display: none; }
+}
