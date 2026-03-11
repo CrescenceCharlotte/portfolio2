@@ -42,6 +42,7 @@ export function StarCursor() {
 
     /* true quand la souris survole une section avec data-hide-star-cursor */
     let hidden = false
+    let wasHidden = false
 
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX
@@ -53,10 +54,21 @@ export function StarCursor() {
 
     const raf = () => {
       if (hidden) {
+        wasHidden = true
         star.style.opacity  = "0"
         trail.style.opacity = "0"
         rafId = requestAnimationFrame(raf)
         return
+      }
+
+      /* Snap le trail à la position actuelle pour éviter le décalage
+         au moment de quitter la navbar */
+      if (wasHidden) {
+        trailX = mouseX
+        trailY = mouseY
+        prevTrailX = mouseX
+        prevTrailY = mouseY
+        wasHidden = false
       }
 
       /* ── Étoile : position exacte du curseur ── */
@@ -97,7 +109,7 @@ export function StarCursor() {
     return () => {
       window.removeEventListener("mousemove", onMouseMove)
       cancelAnimationFrame(rafId)
-      document.head.removeChild(styleEl)
+      styleEl.remove()
     }
   }, [])
 

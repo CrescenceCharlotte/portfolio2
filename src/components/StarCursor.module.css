@@ -8,9 +8,9 @@
   top: 0;
   left: 0;
   /* Centre l'étoile sur le point du curseur */
-  margin: -6px 0 0 -6px;
-  width: 12px;
-  height: 12px;
+  margin: -9px 0 0 -9px;
+  width: 18px;
+  height: 18px;
   pointer-events: none;
   z-index: 99999;
   will-change: transform;
