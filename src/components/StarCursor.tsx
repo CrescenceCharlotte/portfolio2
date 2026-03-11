@@ -13,7 +13,6 @@ import styles from "./StarCursor.module.css"
 export function StarCursor() {
   const starRef  = useRef<HTMLDivElement>(null)
   const trailRef = useRef<HTMLDivElement>(null)
-  const glowRef  = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const isTouch = window.matchMedia("(pointer: coarse)").matches
@@ -21,8 +20,7 @@ export function StarCursor() {
 
     const star  = starRef.current
     const trail = trailRef.current
-    const glow  = glowRef.current
-    if (!star || !trail || !glow) return
+    if (!star || !trail) return
 
     /* Masque le curseur natif sur tous les éléments */
     const styleEl = document.createElement("style")
@@ -39,20 +37,30 @@ export function StarCursor() {
     let prevTrailX = mouseX
     let prevTrailY = mouseY
 
-    // Halo : suit encore plus doucement
-    let glowX = mouseX
-    let glowY = mouseY
-
     let trailAngle = 0
     let rafId: number
+
+    /* true quand la souris survole une section avec data-hide-star-cursor */
+    let hidden = false
 
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX
       mouseY = e.clientY
+
+      const el = document.elementFromPoint(e.clientX, e.clientY)
+      hidden = el?.closest("[data-hide-star-cursor]") !== null
     }
 
     const raf = () => {
+      if (hidden) {
+        star.style.opacity  = "0"
+        trail.style.opacity = "0"
+        rafId = requestAnimationFrame(raf)
+        return
+      }
+
       /* ── Étoile : position exacte du curseur ── */
+      star.style.opacity   = ""
       star.style.transform = `translate(${mouseX}px, ${mouseY}px)`
 
       /* ── Queue : suit le curseur avec lag ── */
@@ -80,17 +88,6 @@ export function StarCursor() {
       prevTrailX = trailX
       prevTrailY = trailY
 
-      /* ── Halo diffus : suit encore plus doucement ── */
-      glowX += (mouseX - glowX) * 0.08
-      glowY += (mouseY - glowY) * 0.08
-      glow.style.transform = `translate(${glowX}px, ${glowY}px)`
-
-      // Agrandit le halo proportionnellement à la vitesse
-      const glowSize = 30 + speed * 2
-      glow.style.width  = `${glowSize}px`
-      glow.style.height = `${glowSize}px`
-      glow.style.margin = `-${glowSize / 2}px 0 0 -${glowSize / 2}px`
-
       rafId = requestAnimationFrame(raf)
     }
 
@@ -106,7 +103,6 @@ export function StarCursor() {
 
   return (
     <>
-      <div ref={glowRef}  className={styles.glow}  aria-hidden="true" />
       <div ref={trailRef} className={styles.trail} aria-hidden="true" />
       <div ref={starRef}  className={styles.star}  aria-hidden="true">
         <div className={styles.starShape} />

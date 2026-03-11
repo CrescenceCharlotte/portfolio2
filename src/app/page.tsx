@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Hero3D } from "@/components/Hero3D"
+import { HeroShootingStar } from "@/components/HeroShootingStar"
 import { LiquidGlass } from "@/components/LiquidGlass"
 import { LiquidGlassButton } from "@/components/LiquidGlassButton"
 import { CardWork } from "@/components/CardWork"
@@ -35,7 +35,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           SECTION 1 — Hero 3D
       ══════════════════════════════════════════ */}
-      <Hero3D />
+      <HeroShootingStar />
 
       {/* ══════════════════════════════════════════
           SECTION 2 — Expertise en 3 colonnes

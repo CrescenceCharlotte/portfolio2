@@ -13,12 +13,15 @@ tools:
   - Adobe Express
   - Photoshop
   - CapCut
-featured_image:
-  - /images/projects/proxite/affiche-alcool.jpg
+featured_image: "/images/projects/Addiction/Mockup affiche 4x3 alcool.png"
 gallery:
-  - - /images/projects/proxite/affiche-alcool.jpg
-    - /images/projects/proxite/mockup-affichage.jpg
-    - /images/projects/proxite/post-instagram.jpg
+  - - "/images/projects/Addiction/Mockup affiche 4x3 alcool.png"
+    - "/images/projects/Addiction/Affiche conduite dangereuse .pdf_page-0001.jpg"
+    - "/images/projects/Addiction/chax2.PNG"
+    - "/images/projects/Addiction/associationproxite.pdf_page-0001.jpg"
+    - "/images/projects/Addiction/associationproxite.pdf_page-0002.jpg"
+    - "/images/projects/Addiction/associationproxite.pdf_page-0003.jpg"
+    - "/images/projects/Addiction/ Moodboard proxité.png.png"
 duration: 1 mois
 status: Terminé
 project_url: ""
@@ -37,15 +40,9 @@ objectifs_conatifs:
   - Réduire la banalisation de l'alcool et des distractions au volant
   - Favoriser le partage et la diffusion des messages de prévention sur les réseaux sociaux
 preuves:
-  - type: Image
-    description: Affiche 4x3 de sensibilisation sur l'alcool
-    file: null
-  - type: Image
-    description: Post Instagram éducatif sur les causes d'accidents
-    file: null
-  - type: Vidéo
-    description: Vidéo courte de sensibilisation pour TikTok et Instagram
-    file: null
+  - type: PDF
+    description: Dossier atelier de Sensibilisation des Addictions
+    pdf: "/images/projects/Addiction/Dossier atelier de Sensibilisation des Addictions.pdf.pdf"
 excerpt: Conception d'une campagne de prévention multicanale pour sensibiliser les jeunes aux dangers liés à l'alcool, à la conduite dangereuse et aux addictions numériques.
 published: true
 ---

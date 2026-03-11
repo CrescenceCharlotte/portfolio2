@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown"
 import Link from "next/link"
 import { ProjectGallery } from "@/components/ui/project-gallery"
 import { ProjectEvidenceList } from "@/components/ui/project-evidence"
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import type { ProjectEvidence } from "@/lib/content"
 
 interface ProjectDataForClient {
@@ -21,6 +22,7 @@ interface ProjectDataForClient {
   project_type: string
   tools: string[]
   featured_image: string
+  carousel?: string[]
   gallery: { image: string }[]
   duration?: string
   status: string
@@ -198,6 +200,72 @@ export function RealisationDetailClient({
                 <ReactMarkdown>{project.body}</ReactMarkdown>
               </div>
             </ScrollReveal>
+
+            {/* Carrousel de visuels */}
+            {project.carousel && project.carousel.length > 0 && (
+              <ScrollReveal delay={0.1}>
+                <div style={{ marginBottom: "4rem" }}>
+                  <SectionLabel>Visuels</SectionLabel>
+                  <div
+                    style={{
+                      border: "1px solid rgba(197,160,89,0.12)",
+                      background: "rgba(10,15,30,0.35)",
+                      padding: "1.5rem 4rem",
+                      position: "relative",
+                    }}
+                  >
+                    <Carousel opts={{ loop: true }}>
+                      <CarouselContent>
+                        {project.carousel.map((src, i) => (
+                          <CarouselItem key={i}>
+                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
+                              <img
+                                src={src}
+                                alt={`Visuel ${i + 1}`}
+                                style={{
+                                  maxWidth: "100%",
+                                  maxHeight: "520px",
+                                  width: "auto",
+                                  height: "auto",
+                                  objectFit: "contain",
+                                  display: "block",
+                                  margin: "0 auto",
+                                }}
+                              />
+                            </div>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselPrevious
+                        style={{
+                          background: "rgba(10,15,30,0.85)",
+                          border: "1px solid rgba(197,160,89,0.25)",
+                          color: "rgba(197,160,89,0.8)",
+                        }}
+                      />
+                      <CarouselNext
+                        style={{
+                          background: "rgba(10,15,30,0.85)",
+                          border: "1px solid rgba(197,160,89,0.25)",
+                          color: "rgba(197,160,89,0.8)",
+                        }}
+                      />
+                    </Carousel>
+                    <p style={{
+                      textAlign: "center",
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "clamp(0.55rem, 0.7vw, 0.6rem)",
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      color: "rgba(200,220,255,0.2)",
+                      marginTop: "1.25rem",
+                    }}>
+                      {project.carousel.length} visuels — utilisez les flèches pour naviguer
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            )}
 
             {/* Galerie d'images */}
             {project.gallery && project.gallery.length > 0 && (

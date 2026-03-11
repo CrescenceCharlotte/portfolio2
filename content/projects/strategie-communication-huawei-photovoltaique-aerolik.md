@@ -15,12 +15,17 @@ tools:
   - Google Forms
   - Outlook
   - Microsoft Teams
-featured_image:
-  - /images/projects/huawei-photovoltaique/event-annonce.jpg
+featured_image: /images/projects/huawei-photovoltaique/IMG_1862.PNG
+carousel:
+  - /images/projects/huawei-photovoltaique/Caroussel/IMG_2038.PNG
+  - /images/projects/huawei-photovoltaique/Caroussel/IMG_2039.PNG
+  - /images/projects/huawei-photovoltaique/Caroussel/IMG_2040.PNG
+  - /images/projects/huawei-photovoltaique/Caroussel/IMG_2041.PNG
+  - /images/projects/huawei-photovoltaique/Caroussel/IMG_2042.PNG
 gallery:
-  - - /images/projects/huawei-photovoltaique/event-annonce.jpg
-    - /images/projects/huawei-photovoltaique/event-lot.jpg
-    - /images/projects/huawei-photovoltaique/event-rappel.jpg
+  - - /images/projects/huawei-photovoltaique/IMG_1862.PNG
+    - /images/projects/huawei-photovoltaique/IMG_2119.PNG
+    - /images/projects/huawei-photovoltaique/IMG_2120.PNG
 video_url: ""
 duration: 2 mois
 status: Terminé

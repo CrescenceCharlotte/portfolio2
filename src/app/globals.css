@@ -54,6 +54,20 @@
   }
 }
 
+/*
+ * Masque le curseur natif — hors @layer pour priorité de cascade maximale.
+ * Overriderait même les styles Tailwind utilities (cursor-pointer, etc.)
+ */
+*, *::before, *::after {
+  cursor: none !important;
+}
+@media (pointer: coarse) {
+  /* Rétablit le curseur sur les appareils tactiles */
+  *, *::before, *::after {
+    cursor: auto !important;
+  }
+}
+
 /* Styles personnalisés pour le contenu prose (Markdown) */
 @layer components {
   .prose {

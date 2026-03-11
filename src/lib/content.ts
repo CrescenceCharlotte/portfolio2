@@ -27,6 +27,7 @@ export interface Project {
   project_type: string
   tools: string[]
   featured_image: string
+  carousel?: string[]
   gallery: { image: string }[]
   duration?: string
   status: 'En cours' | 'Terminé' | 'En pause'
@@ -123,6 +124,7 @@ export function getProjectData(slug: string): Project | null {
       ...data,
       body: content,
       tools: data.tools || [],
+      carousel: data.carousel || [],
       gallery: data.gallery || [],
       ordre: data.ordre || 999, // Valeur par défaut si pas définie
     } as Project

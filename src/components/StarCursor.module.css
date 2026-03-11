@@ -61,27 +61,6 @@
   filter: blur(0.4px);
 }
 
-/* ── Halo diffus autour de l'étoile (2e élément glow) ── */
-.glow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 30px;
-  margin: -15px 0 0 -15px;
-  pointer-events: none;
-  z-index: 99997;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(130, 180, 255, 0.18) 0%,
-    transparent 70%
-  );
-  will-change: transform;
-  /* Suit avec un léger lag via CSS transition */
-  transition: width 0.1s, height 0.1s;
-}
-
 /* ── Keyframes ── */
 @keyframes starPulse {
   0%, 100% {
@@ -103,6 +82,5 @@
 /* ── Desktop uniquement ── */
 @media (pointer: coarse) {
   .star,
-  .trail,
-  .glow { display: none; }
+  .trail { display: none; }
 }

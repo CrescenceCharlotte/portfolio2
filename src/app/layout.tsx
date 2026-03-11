@@ -53,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="fr" className={`${inter.variable} ${playfair.variable}`} style={{ cursor: "none" }}>
       <body className="font-sans antialiased min-h-screen flex flex-col">
         <LenisProvider>
           {/* Filtre SVG pour l'effet Liquid Glass — invisible, référencé par id */}

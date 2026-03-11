@@ -57,6 +57,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         project_type: project.project_type,
         tools: project.tools,
         featured_image: project.featured_image,
+        carousel: project.carousel || [],
         gallery: project.gallery,
         duration: project.duration,
         status: project.status,
