@@ -111,6 +111,22 @@ const ChartTooltipContent = React.forwardRef<
       indicator?: "line" | "dot" | "dashed"
       nameKey?: string
       labelKey?: string
+      // Props marked as context-only by Recharts but used directly here
+      active?: boolean
+      label?: string | number
+      labelFormatter?: (label: unknown, payload: unknown[]) => React.ReactNode
+      labelClassName?: string
+      formatter?: (value: unknown, name: unknown, item: unknown, index: number, payload?: unknown) => React.ReactNode
+      color?: string
+      payload?: Array<{
+        value?: number | string
+        name?: string
+        dataKey?: string | number
+        color?: string
+        fill?: string
+        payload?: Record<string, unknown>
+        [key: string]: unknown
+      }>
     }
 >(
   (
@@ -188,7 +204,7 @@ const ChartTooltipContent = React.forwardRef<
           {payload.map((item, index) => {
             const key = `${nameKey || item.name || item.dataKey || "value"}`
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
-            const indicatorColor = color || item.payload.fill || item.color
+            const indicatorColor = color || item.payload?.fill || item.color
 
             return (
               <div
@@ -261,7 +277,16 @@ const ChartLegend = RechartsPrimitive.Legend
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> &
-    Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+    {
+      payload?: ReadonlyArray<{
+        value?: string
+        type?: string
+        color?: string
+        dataKey?: string | number
+        payload?: object
+        [key: string]: unknown
+      }>
+      verticalAlign?: "top" | "bottom" | "middle"
       hideIcon?: boolean
       nameKey?: string
     }
