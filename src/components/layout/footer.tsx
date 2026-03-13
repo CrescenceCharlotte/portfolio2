@@ -55,18 +55,6 @@ export function Footer() {
               Charlotte Crescence
             </span>
           </Link>
-          <span
-            style={{
-              fontFamily:    "var(--font-sans, Inter, sans-serif)",
-              fontWeight:    400,
-              fontSize:      "0.6rem",
-              letterSpacing: "0.28em",
-              textTransform: "uppercase",
-              color:         "rgba(140, 170, 210, 0.4)",
-            }}
-          >
-            Art Direction · Digital · Portfolio
-          </span>
         </div>
 
         {/* ── Séparateur or ── */}

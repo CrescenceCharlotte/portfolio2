@@ -44,19 +44,6 @@ export function Header() {
           >
             Charlotte Crescence
           </span>
-          <span
-            style={{
-              fontFamily:   "var(--font-sans, Inter, sans-serif)",
-              fontWeight:   400,
-              fontSize:     "0.58rem",
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color:        "rgba(140, 170, 210, 0.45)",
-              marginTop:    "1px",
-            }}
-          >
-            Art Direction · Digital
-          </span>
         </Link>
 
         {/* ── Navigation Desktop ── */}

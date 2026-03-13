@@ -11,35 +11,35 @@ export default function AProposPage() {
     title: "À propos de moi",
     profile_image: undefined as string | undefined,
     skills: [
-      "Adobe Creative Suite",
-      "Figma",
-      "Photographie",
-      "Illustration",
-      "Branding",
-      "Web Design",
-      "Print Design"
+      "Photoshop",
+      "Illustrator",
+      "Canva",
+      "CapCut",
+      "Instagram",
+      "TikTok",
+      "Notion",
+      "Création de contenu",
+      "Événementiel",
     ],
     body: `## Qui suis-je ?
 
-Étudiante en deuxième année de BTS Communication, je construis une approche où stratégie et imagination avancent ensemble.
+Étudiante en BTS Communication en alternance à La Réunion, je construis mon parcours à l'intersection de la stratégie, du digital et de la création visuelle. Passionnée par les réseaux sociaux, la production de contenu et l'événementiel, je conçois des projets qui engagent et qui racontent une histoire.
 
-Passionnée par le digital, la création de contenu et l'événementiel, je conçois des projets qui ont du sens, qui engagent et qui racontent une histoire. Pour moi, une communication réussie ne se limite pas à être vue : elle doit être ressentie.
+Pour moi, une communication réussie ne se limite pas à être vue — elle doit être ressentie.
 
-Douce dans mon approche et ambitieuse dans mes objectifs, je cherche à transformer chaque idée en expérience mémorable.
+## Mon approche
 
-## Ma philosophie
+J'aborde chaque projet avec méthode et curiosité : comprendre les objectifs, identifier la cible, puis imaginer une réponse créative cohérente. Maîtrisant les outils Adobe (Photoshop, Illustrator), Canva et les plateformes digitales (Instagram, TikTok), je suis à l'aise aussi bien dans la production visuelle que dans la gestion de contenu.
 
-Actuellement en deuxième année de BTS, je développe une approche où stratégie et imagination avancent ensemble.
-
-Attirée par le digital, la création de contenu et l'événementiel, j'aime concevoir des projets qui ont du sens, qui engagent et qui racontent une histoire. Pour moi, une bonne communication ne se limite pas à être vue : elle doit être ressentie. Douce dans mon approche et ambitieuse dans mes objectifs, je cherche toujours à transformer une idée en expérience mémorable.
+Autonome, dynamique et force de proposition — je cherche à transformer chaque idée en expérience mémorable.
 
 ## Mon processus créatif
 
-1. **Écoute et analyse** : Comprendre les objectifs du projet, la cible et les attentes pour poser une base stratégique solide.
-2. **Recherche et inspiration** : Explorer les tendances digitales, les références créatives et les insights afin de nourrir une idée pertinente et porteuse de sens.
-3. **Conception** : Imaginer et développer des concepts créatifs qui racontent une histoire, engagent le public et traduisent l'identité du projet.
-4. **Itération** : Ajuster, affiner et optimiser les propositions pour renforcer l'impact émotionnel et l'efficacité du message.
-5. **Livraison** : Finaliser une expérience cohérente et mémorable, prête à être déployée sur les supports adaptés.`
+1. **Écoute et analyse** — Comprendre les objectifs, la cible, les contraintes du projet
+2. **Recherche** — Explorer les tendances, nourrir l'idée de références pertinentes
+3. **Conception** — Développer des concepts créatifs, visuellement et narrativement cohérents
+4. **Itération** — Affiner, ajuster, optimiser l'impact du message
+5. **Livraison** — Déployer une expérience cohérente sur les supports adaptés`
   }
 
   return (

@@ -1,34 +1,33 @@
 ---
 title: "À propos de moi"
 skills:
-  - "Adobe Creative Suite"
-  - "Figma"
-  - "Sketch"
-  - "Photographie"
-  - "Illustration"
-  - "Branding"
-  - "Web Design"
-  - "Print Design"
+  - "Photoshop"
+  - "Illustrator"
+  - "Canva"
+  - "CapCut"
+  - "Instagram"
+  - "TikTok"
+  - "Notion"
+  - "Création de contenu"
+  - "Événementiel"
 ---
 
 ## Qui suis-je ?
 
-Graphiste freelance depuis plus de 5 ans, je me spécialise dans la création d'identités visuelles fortes et mémorables. Ma formation en arts appliqués et mon expérience en agence m'ont permis de développer une approche méthodique et créative du design.
+Étudiante en BTS Communication en alternance à La Réunion, je construis mon parcours à l'intersection de la stratégie, du digital et de la création visuelle. Passionnée par les réseaux sociaux, la production de contenu et l'événementiel, je conçois des projets qui engagent et qui racontent une histoire.
 
-## Ma philosophie
+Pour moi, une communication réussie ne se limite pas à être vue — elle doit être ressentie.
 
-Je crois que chaque projet a sa propre personnalité et mérite une approche unique. Mon rôle est de comprendre vos besoins, votre audience et vos objectifs pour créer des solutions visuelles qui vous démarquent.
+## Mon approche
+
+J'aborde chaque projet avec méthode et curiosité : comprendre les objectifs, identifier la cible, puis imaginer une réponse créative cohérente. Maîtrisant les outils Adobe (Photoshop, Illustrator), Canva et les plateformes digitales (Instagram, TikTok), je suis à l'aise aussi bien dans la production visuelle que dans la gestion de contenu.
+
+Autonome, dynamique et force de proposition — je cherche à transformer chaque idée en expérience mémorable.
 
 ## Mon processus créatif
 
-1. **Écoute et analyse** : Comprendre votre projet et vos attentes
-2. **Recherche et inspiration** : Explorer les tendances et références
-3. **Conception** : Développer les concepts créatifs
-4. **Itération** : Affiner et perfectionner les créations
-5. **Livraison** : Finaliser et décliner sur tous supports
-
-## Collaborations
-
-J'ai eu le plaisir de travailler avec des startups innovantes, des PME dynamiques et des associations engagées. Chaque collaboration est une opportunité d'apprendre et de créer quelque chose d'unique.
-
-Prêt(e) à donner vie à votre projet ? Contactons-nous !
+1. **Écoute et analyse** — Comprendre les objectifs, la cible, les contraintes du projet
+2. **Recherche** — Explorer les tendances, nourrir l'idée de références pertinentes
+3. **Conception** — Développer des concepts créatifs, visuellement et narrativement cohérents
+4. **Itération** — Affiner, ajuster, optimiser l'impact du message
+5. **Livraison** — Déployer une expérience cohérente sur les supports adaptés
