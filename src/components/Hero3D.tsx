@@ -361,12 +361,6 @@ export function Hero3D() {
           <div ref={worldRef} className={styles.world} />
         </div>
 
-        {/* ── Indicateur de défilement ── */}
-        <div className={styles.scrollIndicator} aria-hidden="true">
-          <div className={styles.scrollLine} />
-          <span>Défiler</span>
-        </div>
-
       </div>
     </section>
   )

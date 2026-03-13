@@ -559,63 +559,6 @@ export function HeroShootingStar() {
         </p>
       </div>
 
-      {/* Message souris */}
-      <p
-        ref={msgRef}
-        style={{
-          position:      "absolute",
-          right:         0,
-          bottom:        "5rem",
-          left:          0,
-          margin:        0,
-          color:         "rgba(210, 228, 255, 0.45)",
-          fontFamily:    "var(--font-sans, Inter, sans-serif)",
-          fontSize:      "0.65rem",
-          textAlign:     "center",
-          letterSpacing: "0.22em",
-          textTransform: "uppercase",
-          pointerEvents: "none",
-          opacity:       0,
-          transition:    "opacity 700ms",
-          zIndex:        3,
-        }}
-      >
-        Déplacez votre souris
-      </p>
-
-      {/* Indicateur de défilement */}
-      <div
-        aria-hidden="true"
-        style={{
-          position:      "absolute",
-          bottom:        "2rem",
-          left:          "50%",
-          transform:     "translateX(-50%)",
-          display:       "flex",
-          flexDirection: "column",
-          alignItems:    "center",
-          gap:           "0.55rem",
-          pointerEvents: "none",
-          animation:     "hssScrollIn 1.5s ease 4s both",
-          zIndex:        3,
-        }}
-      >
-        <div style={{
-          width:      "1px",
-          height:     "42px",
-          background: "linear-gradient(to bottom, transparent, rgba(197,160,89,0.4))",
-          animation:  "hssPulse 2.2s ease-in-out infinite",
-        }} />
-        <span style={{
-          fontFamily:    "var(--font-sans, Inter, sans-serif)",
-          fontSize:      "7px",
-          letterSpacing: "0.35em",
-          color:         "rgba(140, 170, 210, 0.3)",
-          textTransform: "uppercase",
-        }}>
-          Défiler
-        </span>
-      </div>
 
       <style>{`
         @keyframes hssTwA {
