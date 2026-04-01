@@ -232,16 +232,18 @@ export default function Home() {
               const image = Array.isArray(p.featured_image)
                 ? (p.featured_image as string[])[0]
                 : p.featured_image
-              const subtitle = Array.isArray(p.project_type)
-                ? (p.project_type as string[])[0]
-                : p.project_type
+              const projectTypes = Array.isArray(p.project_type)
+                ? (p.project_type as string[])
+                : p.project_type ? [p.project_type] : undefined
               return (
                 <CardWork
                   key={p.slug}
                   slug={p.slug}
                   title={p.title}
                   image={image}
-                  subtitle={subtitle}
+                  projectTypes={projectTypes}
+                  date={p.date}
+                  annonceur={p.annonceur}
                   hrefBase="/realisations"
                 />
               )

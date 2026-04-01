@@ -1,27 +1,24 @@
 backend:
   name: github
-  repo: CorentinBasson/portfolio
+  repo: CrescenceCharlotte/portfolio2
   branch: main
-  base_url: https://cbsn.netlify.app
-  auth_endpoint: /.netlify/functions/auth
+  base_url: https://VOTRE_DOMAINE
+  auth_endpoint: /api/auth
 
-# URL du site pour afficher un lien dans la navbar du CMS
-site_url: https://cbsn.netlify.app
+# URL du site
+site_url: https://VOTRE_DOMAINE
 
 # Configuration du stockage des médias avec Cloudinary
 media_library:
   name: cloudinary
   config:
-    cloud_name: dcrgwzlnc  # À remplacer par le nom de votre compte Cloudinary
-    api_key: 772966115598952        # À remplacer par votre clé API Cloudinary
+    cloud_name: dyydosgxb
+    api_key: 772966115598952
     multiple: true
 
 # Dossier de stockage des médias dans le repository (fallback pour PDF > 20MB)
 media_folder: "public/uploads"
 public_folder: "/uploads"
-
-# Configuration locale pour le développement
-local_backend: true
 
 # Collections de contenu
 collections:

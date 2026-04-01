@@ -5,14 +5,18 @@ export function CardWork({
   slug,
   title,
   image,
-  subtitle,
+  projectTypes,
+  date,
+  annonceur,
   hrefBase = "/projects",
 }: {
-  slug:      string
-  title:     string
-  image?:    string
-  subtitle?: string
-  hrefBase?: string
+  slug:          string
+  title:         string
+  image?:        string
+  projectTypes?: string | string[]
+  date?:         string
+  annonceur?:    string
+  hrefBase?:     string
 }) {
   return (
     <Link
@@ -126,20 +130,38 @@ export function CardWork({
             >
               {title}
             </h3>
-            {subtitle && (
-              <p
-                style={{
-                  fontFamily:    "var(--font-sans, Inter, sans-serif)",
-                  fontWeight:    400,
-                  fontSize:      "0.65rem",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color:         "rgba(140, 180, 220, 0.55)",
-                  marginTop:     "0.3rem",
-                  marginBottom:  0,
-                }}
-              >
-                {subtitle}
+
+            {/* Types de projet */}
+            {projectTypes && (
+              <p style={{
+                fontFamily:    "var(--font-sans, Inter, sans-serif)",
+                fontWeight:    400,
+                fontSize:      "0.7rem",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color:         "rgba(140, 180, 220, 0.65)",
+                marginTop:     "0.5rem",
+                marginBottom:  0,
+                lineHeight:    1.4,
+              }}>
+                {Array.isArray(projectTypes) ? projectTypes.join(" · ") : projectTypes}
+              </p>
+            )}
+
+            {/* Année + annonceur */}
+            {(date || annonceur) && (
+              <p style={{
+                fontFamily:  "var(--font-sans, Inter, sans-serif)",
+                fontWeight:  400,
+                fontSize:    "0.72rem",
+                color:       "rgba(197, 160, 89, 0.7)",
+                marginTop:   "0.35rem",
+                marginBottom: 0,
+                lineHeight:  1.4,
+              }}>
+                {date && new Date(date).getFullYear()}
+                {date && annonceur && " · "}
+                {annonceur}
               </p>
             )}
           </LiquidGlass>

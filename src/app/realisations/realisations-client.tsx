@@ -96,16 +96,18 @@ export function RealisationsClient({ projects }: RealisationsClientProps) {
               const image = Array.isArray(project.featured_image)
                 ? (project.featured_image as unknown as string[])[0]
                 : project.featured_image
-              const subtitle = Array.isArray(project.project_type)
-                ? (project.project_type as unknown as string[])[0]
-                : project.project_type
+              const projectTypes = Array.isArray(project.project_type)
+                ? (project.project_type as unknown as string[])
+                : project.project_type ? [project.project_type] : undefined
               return (
                 <ScrollReveal key={project.slug} delay={i * 0.12}>
                   <CardWork
                     slug={project.slug}
                     title={project.title}
                     image={image}
-                    subtitle={subtitle}
+                    projectTypes={projectTypes}
+                    date={project.date}
+                    annonceur={project.annonceur}
                     hrefBase="/realisations"
                   />
                 </ScrollReveal>

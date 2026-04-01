@@ -6,16 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 pnpm dev          # Start dev server with Turbopack
-pnpm build        # Build static export to out/
+pnpm build        # Build for production (standalone output)
 pnpm start        # Serve production build
 pnpm lint         # Run ESLint
 ```
 
-**Package manager:** pnpm (v10.13.1) — always use `pnpm`, not `npm` or `yarn`.
+**Package manager:** pnpm (v10.32.1) — always use `pnpm`, not `npm` or `yarn`.
 
 ## Architecture
 
-**Next.js 15 App Router** with full static export (`output: 'export'`) deployed to Netlify. All pages are pre-rendered at build time; there is no server-side rendering.
+**Next.js 16 App Router** with `output: 'standalone'` deployed via Docker (see `Dockerfile`). Pages are server-rendered by default; no API routes.
 
 ### Content System
 
@@ -23,8 +23,9 @@ Content lives in `content/` as Markdown files managed by **Decap CMS** (at `/adm
 
 ### Key Directories
 
-- `src/app/` — App Router pages. French/English variants exist as parallel routes (e.g. `about/` and `a-propos/`, `projects/` and `realisations/`)
+- `src/app/` — App Router pages. French/English route variants exist in parallel (e.g. `about/` and `a-propos/`, `projects/` and `realisations/`)
 - `src/components/ui/` — shadcn/ui components (New York style, Radix UI primitives)
+- `src/components/ogaki/` — Alternative design system/theme with its own layout, cursor, navbar and animation components
 - `src/components/` — Custom components, heavily animation-focused
 - `content/` — Markdown content files (projects, pages)
 - `public/admin/` — Decap CMS static interface (`config.yml` defines CMS schema)
@@ -32,21 +33,19 @@ Content lives in `content/` as Markdown files managed by **Decap CMS** (at `/adm
 
 ### Styling
 
-Tailwind CSS with HSL-based CSS custom properties. Complex animations use CSS Modules (e.g. `Hero3D.module.css`). Custom fonts: Inter (sans) and Playfair Display (serif), configured in `tailwind.config.js`.
+Tailwind CSS with HSL-based CSS custom properties. Inline styles are used extensively in page components alongside Tailwind. Custom fonts: Inter (`--font-sans`) and Playfair Display (`--font-serif`), loaded via `next/font/google`.
 
 ### Animation Stack
 
 - **Three.js** — 3D hero section (`Hero3D.tsx`)
 - **GSAP + Framer Motion** — UI animations
-- **Lenis** — smooth scrolling (wrapped in `LenisProvider`)
-- Custom cursor effects (`StarCursor.tsx`, `Cursor.tsx`)
+- **Lenis** — smooth scrolling, wrapped in `LenisProvider` at root layout
+- Custom cursor effects (`StarCursor.tsx`, `Cursor.tsx`); `cursor: none` is set on `<html>`
+- Global star field background rendered behind all content via `GlobalStarField`
 
-### Static Export Constraints
+### Notable Config
 
-- `next/image` is set to `unoptimized: true` — do not rely on Next.js image optimization
-- No API routes (static export incompatible) — all dynamic behavior is client-side or via Netlify Functions
-- `raw-loader` is configured in `next.config.ts` for importing Markdown files directly
-
-### Path Alias
-
-`@/*` maps to `./src/*`.
+- `next/image` is `unoptimized: true` — do not rely on Next.js image optimization
+- `raw-loader` handles `.md` file imports in Turbopack config
+- `canvas` module is aliased to an empty stub (`src/empty-module.js`) for SSR compatibility with Three.js
+- Path alias: `@/*` maps to `./src/*`

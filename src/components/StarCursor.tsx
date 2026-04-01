@@ -73,7 +73,7 @@ export function StarCursor() {
 
       /* ── Étoile : position exacte du curseur ── */
       star.style.opacity   = ""
-      star.style.transform = `translate(${mouseX}px, ${mouseY}px)`
+      star.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`
 
       /* ── Queue : suit le curseur avec lag ── */
       trailX += (mouseX - trailX) * 0.16
@@ -88,13 +88,12 @@ export function StarCursor() {
         trailAngle = Math.atan2(dy, dx) * (180 / Math.PI)
       }
 
-      // Longueur et opacité de la queue proportionnelles à la vitesse
-      const trailLength  = Math.min(12 + speed * 4.5, 100)
+      // scaleX remplace style.width pour éviter le reflow layout à chaque frame
+      const trailScale   = Math.min(0.12 + speed * 0.045, 1)
       const trailOpacity = Math.min(speed * 0.11, 0.92)
 
       // La queue part de la position de l'étoile et pointe en sens inverse du mouvement
-      trail.style.transform = `translate(${mouseX}px, ${mouseY}px) rotate(${trailAngle + 180}deg)`
-      trail.style.width     = `${trailLength}px`
+      trail.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) rotate(${trailAngle + 180}deg) scaleX(${trailScale})`
       trail.style.opacity   = String(trailOpacity)
 
       prevTrailX = trailX
