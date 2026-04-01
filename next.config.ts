@@ -1,9 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
   images: {
     unoptimized: true,
+  },
+  async redirects() {
+    return [
+      {
+        source: '/admin',
+        destination: '/admin/index.html',
+        permanent: false,
+      },
+    ]
   },
   // Configuration Turbopack (Next.js 16+)
   turbopack: {
