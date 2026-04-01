@@ -27,29 +27,51 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: tokenData.error_description ?? tokenData.error }, { status: 400 })
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
+  const token   = tokenData.access_token
+  const content = JSON.stringify({ token, provider: "github" })
 
   const html = `<!DOCTYPE html>
 <html>
-<head><title>Authentification réussie</title></head>
+<head>
+  <meta charset="utf-8" />
+  <title>Authentification</title>
+</head>
 <body>
 <script>
 (function() {
-  function receiveMessage(e) {
-    if (e.origin !== ${JSON.stringify(siteUrl)}) return;
-    e.source.postMessage(
-      "authorization:github:success:" + JSON.stringify({ token: ${JSON.stringify(tokenData.access_token)}, provider: "github" }),
-      e.origin
+  var opener = window.opener;
+  if (!opener) { window.close(); return; }
+
+  function onMessage(e) {
+    if (e.data === "authorizing:github" || (typeof e.data === "string" && e.data.indexOf("authorizing") !== -1)) return;
+    window.removeEventListener("message", onMessage);
+    opener.postMessage(
+      "authorization:github:success:${content}",
+      window.location.origin
     );
+    setTimeout(function() { window.close(); }, 500);
   }
-  window.addEventListener("message", receiveMessage, false);
-  if (window.opener) window.opener.postMessage("authorizing:github", ${JSON.stringify(siteUrl)});
-  setTimeout(() => window.close(), 5000);
+
+  window.addEventListener("message", onMessage);
+  opener.postMessage("authorizing:github", window.location.origin);
+
+  // Fallback : envoyer directement si le CMS ne répond pas dans 2s
+  setTimeout(function() {
+    opener.postMessage(
+      "authorization:github:success:${content}",
+      window.location.origin
+    );
+    setTimeout(function() { window.close(); }, 500);
+  }, 2000);
 })();
 </script>
-<p>Authentification réussie. Cette fenêtre va se fermer automatiquement.</p>
+<p style="font-family:sans-serif;text-align:center;margin-top:3rem">
+  Authentification en cours&hellip;
+</p>
 </body>
 </html>`
 
-  return new NextResponse(html, { headers: { "Content-Type": "text/html" } })
+  return new NextResponse(html, {
+    headers: { "Content-Type": "text/html; charset=utf-8" },
+  })
 }
