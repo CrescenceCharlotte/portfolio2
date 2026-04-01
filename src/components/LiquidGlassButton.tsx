@@ -17,6 +17,7 @@ interface LiquidGlassButtonProps {
   /** Texte en or au lieu du blanc lunaire */
   gold?:     boolean
   type?:     "button" | "submit" | "reset"
+  disabled?: boolean
 }
 
 export function LiquidGlassButton({
@@ -25,9 +26,10 @@ export function LiquidGlassButton({
   onClick,
   className,
   style,
-  pill  = false,
-  gold  = false,
-  type  = "button",
+  pill     = false,
+  gold     = false,
+  type     = "button",
+  disabled = false,
 }: LiquidGlassButtonProps) {
   const textColor = gold
     ? "rgba(197, 160, 89, 0.92)"
@@ -63,7 +65,8 @@ export function LiquidGlassButton({
     <button
       type={type}
       onClick={onClick}
-      style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
+      disabled={disabled}
+      style={{ background: "none", border: "none", padding: 0, cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.5 : 1 }}
     >
       {inner}
     </button>

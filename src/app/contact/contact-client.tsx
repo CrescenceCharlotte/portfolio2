@@ -1,11 +1,31 @@
 "use client"
 
+import { useState } from "react"
 import { ScrollReveal } from "@/components/ogaki/ScrollReveal"
 import { LiquidGlass } from "@/components/LiquidGlass"
 import { LiquidGlassButton } from "@/components/LiquidGlassButton"
 import { motion } from "framer-motion"
 
 export function ContactClient() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle")
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setStatus("sending")
+    const form = e.currentTarget
+    const data = Object.fromEntries(new FormData(form))
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+    if (res.ok) {
+      setStatus("sent")
+      form.reset()
+    } else {
+      setStatus("error")
+    }
+  }
   return (
     <section
       style={{
@@ -90,16 +110,9 @@ export function ContactClient() {
         <ScrollReveal delay={0.2}>
           <LiquidGlass variant="panel" style={{ padding: "clamp(2rem, 4vw, 3rem)" }}>
             <form
-              name="contact"
-              method="POST"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
               style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}
             >
-              <input type="hidden" name="form-name" value="contact" />
-              <p style={{ display: "none" }}>
-                <label>Ne pas remplir: <input name="bot-field" /></label>
-              </p>
 
               <div>
                 <label htmlFor="contact-name" className="sr-only">Votre nom</label>
@@ -140,9 +153,19 @@ export function ContactClient() {
               </div>
 
               <div style={{ textAlign: "center", paddingTop: "0.5rem" }}>
-                <LiquidGlassButton type="submit" gold>
-                  Envoyer le message
-                </LiquidGlassButton>
+                {status === "sent" ? (
+                  <p style={{ color: "rgba(150, 220, 150, 0.8)", fontFamily: "var(--font-sans)", fontSize: "0.9rem" }}>
+                    Message envoyé, merci !
+                  </p>
+                ) : status === "error" ? (
+                  <p style={{ color: "rgba(220, 100, 100, 0.8)", fontFamily: "var(--font-sans)", fontSize: "0.9rem" }}>
+                    Une erreur est survenue. Réessayez.
+                  </p>
+                ) : (
+                  <LiquidGlassButton type="submit" gold disabled={status === "sending"}>
+                    {status === "sending" ? "Envoi…" : "Envoyer le message"}
+                  </LiquidGlassButton>
+                )}
               </div>
             </form>
           </LiquidGlass>
