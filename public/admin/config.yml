@@ -2,11 +2,11 @@ backend:
   name: github
   repo: CrescenceCharlotte/portfolio2
   branch: main
-  base_url: https://VOTRE_DOMAINE
+  base_url: https://crsccharlotte.netlify.app
   auth_endpoint: /api/auth
 
 # URL du site
-site_url: https://VOTRE_DOMAINE
+site_url: https://crsccharlotte.netlify.app
 
 # Configuration du stockage des médias avec Cloudinary
 media_library:
