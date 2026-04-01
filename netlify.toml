@@ -1,6 +1,9 @@
 [build]
   command = "pnpm build"
 
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
 
