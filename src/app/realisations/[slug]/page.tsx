@@ -62,6 +62,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         duration: project.duration,
         status: project.status,
         pdf_portfolio: project.pdf_portfolio,
+        gallery_style: project.gallery_style,
         project_url: project.project_url,
         cibles: project.cibles,
         strategie_creative: project.strategie_creative,

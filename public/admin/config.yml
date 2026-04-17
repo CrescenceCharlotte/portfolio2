@@ -13,12 +13,14 @@ media_library:
   name: cloudinary
   config:
     cloud_name: dyydosgxb
-    api_key: 772966115598952
+    api_key: 395929777394519
     multiple: true
 
 # Dossier de stockage des médias dans le repository (fallback pour PDF > 20MB)
 media_folder: "public/uploads"
 public_folder: "/uploads"
+
+local_backend: true
 
 # Collections de contenu
 collections:

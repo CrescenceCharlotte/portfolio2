@@ -32,6 +32,7 @@ export interface Project {
   duration?: string
   status: 'En cours' | 'Terminé' | 'En pause'
   pdf_portfolio?: string
+  gallery_style?: string
   project_url?: string
   cibles?: string
   strategie_creative?: string

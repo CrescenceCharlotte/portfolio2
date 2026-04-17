@@ -7,6 +7,7 @@ import { motion } from "framer-motion"
 import ReactMarkdown from "react-markdown"
 import Link from "next/link"
 import { ProjectGallery } from "@/components/ui/project-gallery"
+import { IPhoneCarousel } from "@/components/IPhoneCarousel"
 import { ProjectEvidenceList } from "@/components/ui/project-evidence"
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import type { ProjectEvidence } from "@/lib/content"
@@ -27,6 +28,7 @@ interface ProjectDataForClient {
   duration?: string
   status: string
   pdf_portfolio?: string
+  gallery_style?: string
   project_url?: string
   cibles?: string
   strategie_creative?: string
@@ -272,11 +274,23 @@ export function RealisationDetailClient({
               <ScrollReveal delay={0.1}>
                 <div style={{ marginBottom: "4rem" }}>
                   <SectionLabel>Galerie</SectionLabel>
-                  <ProjectGallery
-                    gallery={project.gallery}
-                    defaultLayout="justified"
-                    showLayoutSwitcher={false}
-                  />
+                  {project.gallery_style === "iphone" ? (
+                    <div style={{ display: "flex", justifyContent: "center", padding: "2rem 0" }}>
+                      <IPhoneCarousel
+                        images={
+                          Array.isArray(project.gallery[0])
+                            ? (project.gallery[0] as unknown as string[])
+                            : project.gallery.map((g) => (g as unknown as { image: string }).image)
+                        }
+                      />
+                    </div>
+                  ) : (
+                    <ProjectGallery
+                      gallery={project.gallery}
+                      defaultLayout="justified"
+                      showLayoutSwitcher={false}
+                    />
+                  )}
                 </div>
               </ScrollReveal>
             )}
